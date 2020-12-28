@@ -18,6 +18,16 @@ export class CartCheckoutPage extends Component {
         }
       }).catch(err => console.log(err))
   }
+  createInternetBankingCharge = (email, name, amount, token) => {
+    axios.post('http://localhost:8000/checkout-internet-banking', { email, name, amount, token }, { headers: { 'Content-Type': 'application/json' } })
+      .then(res => {
+        console.log(res.data)
+        if (res.data) {
+          window.location.href = res.data.authorize_uri
+          this.props.clearCart()
+        }
+      }).catch(err => console.log(err))
+  }
   render() {
     const { cart } = this.props;
     const { charge } = this.state;
@@ -39,6 +49,7 @@ export class CartCheckoutPage extends Component {
         />
         <CheckoutInternetBanking
           cart={cart}
+          createInternetBankingCharge={this.createInternetBankingCharge}
         />
         <div className="message">
           {charge && (

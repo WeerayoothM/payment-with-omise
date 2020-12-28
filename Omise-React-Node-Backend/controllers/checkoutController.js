@@ -24,3 +24,21 @@ exports.checkoutCreditCard = async (req, res, next) => {
 
     next()
 }
+exports.checkoutInternetBanking = async (req, res, next) => {
+
+    const { amount, token } = req.body
+    console.log(req.body)
+    try {
+        const charge = await omise.charges.create({
+            amount,
+            'source': token,
+            'currency': 'thb',
+            'return_uri': 'http://localhost:3000/message',
+        });
+        console.log(charge)
+
+        res.status(201).send({ authorize_uri: charge.authorize_uri })
+    } catch (err) { console.log(err) }
+
+    next()
+}
