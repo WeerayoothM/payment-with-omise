@@ -18,17 +18,17 @@ const products = [
   {
     id: uuid(),
     title: "Full Stack",
-    price: 6000000
+    price: 60000
   },
   {
     id: uuid(),
     title: "React",
-    price: 350000
+    price: 35000
   },
   {
     id: uuid(),
     title: "Node",
-    price: 400000
+    price: 40000
   }
 ];
 
